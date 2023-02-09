@@ -1,0 +1,31 @@
+syntax="proto3";
+
+option java_package = "com.example.grpc.client.server.example";
+
+package students;
+
+
+service StudentService {
+  rpc FindStudentById(StudentId) returns (Student);
+  rpc FindAllStudents(Empty) returns (stream Student);
+  rpc SaveAllStudents(stream Student) returns (Empty);
+  rpc LookIfExists(stream StudentId) returns (stream Acknowledge);
+}
+
+message Empty{
+
+}
+
+message Student{
+  int32 id = 1;
+  string name = 2;
+}
+
+message StudentId{
+  int32  id = 1;
+}
+
+message Acknowledge{
+  int32 id = 1;
+  bool exists = 2;
+}
